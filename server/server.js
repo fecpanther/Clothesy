@@ -20,4 +20,12 @@ app.use((req, res, next) => {
 
 app.use("/", express.static(path.join(__dirname, "../client/public/")));
 
+app.get("/*", function(req, res) {
+  res.sendFile(path.join(__dirname, "../client/public/"), function(err) {
+    if (err) {
+      res.status(500).send(err);
+    }
+  });
+});
+
 app.listen(port, () => console.log(`Panther listening on port ${port}!`));

@@ -7,15 +7,20 @@ const Related = require("../containers/RelatedContainer.js");
 const Reviews = require("../containers/ReviewsContainer.js");
 
 module.exports = props => {
+  console.log(JSON.stringify(props));
   useEffect(() => {
-    props.changeCurrentProduct(1);
+    console.log("useEffect props", JSON.stringify(props));
+    console.log("props.match", props.match);
+    props.changeCurrentProduct(Number(props.match.params.id));
   }, []);
   return (
-    <Container>
-      <Overview />
-      <Qna />
-      <Related />
-      <Reviews />
-    </Container>
+    <div>
+      <Container>
+        <Overview />
+        <Qna />
+        <Related />
+        <Reviews />
+      </Container>
+    </div>
   );
 };

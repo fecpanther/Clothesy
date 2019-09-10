@@ -5,7 +5,8 @@ const config = {
   entry: "./client/src/index.jsx",
   output: {
     path: path.resolve(__dirname, "./client/public/dist"),
-    filename: "bundle.js"
+    filename: "bundle.js",
+    publicPath: "/"
   },
   module: {
     rules: [
@@ -37,6 +38,9 @@ const config = {
   },
   resolve: {
     extensions: [".js", ".jsx"]
+  },
+  devServer: {
+    historyApiFallback: true
   }
 };
 

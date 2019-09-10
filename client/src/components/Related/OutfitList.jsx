@@ -48,12 +48,33 @@ module.exports = function OutfitList(props) {
     });
   };
 
+  const removeFromOutfit = product => {
+    let items = JSON.parse(window.localStorage.getItem("outfit"));
+    items = items.filter(item => {
+      return item !== product;
+    });
+    window.localStorage.setItem("outfit", JSON.stringify(items));
+    setOutfitIds({
+      outfitList: JSON.parse(window.localStorage.getItem("outfit"))
+    });
+  };
+
   return (
     <div className={classes.root}>
       <GridList className={classes.gridList}>
         <AddToOutfitCard addToOutfit={addToOutfit} product={props.productId} />
         {products.map(product => {
-          return <CardItem id={product} key={product} />;
+          return (
+            <CardItem
+              id={product}
+              key={product}
+              showStarIcon={false}
+              changeCurrentProduct={props.changeCurrentProduct}
+              onRemoveClick={() => {
+                removeFromOutfit(product);
+              }}
+            />
+          );
         })}
       </GridList>
     </div>
